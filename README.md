@@ -2,7 +2,7 @@
 
 Personlig forside for arefossa.no: About, Photos, WattsUp og Morning news. Ren HTML og CSS, uten
 byggesteg eller eksterne fonter. Skript bare der det trengs: bildevisningen på `/photos/`, og
-`/morning-news/watch/`, som også laster Googles innlogging.
+rapportene under `/morning-news/`, som også laster Googles innlogging.
 Publiseres med GitHub Pages fra `main`.
 
 ```
@@ -13,7 +13,9 @@ Publiseres med GitHub Pages fra `main`.
 │   ├── photos.js         # bytter bilde (klikk, piltaster, sveip), valgt bilde i #adressen
 │   └── img/              # nettversjonene, laget med tools/prepare_photos.py
 ├── morning-news/         # rapportene fra de planlagte oppgavene i Claude
-│   └── watch/            # Watch list, leser ukefilene fra Google Drive etter innlogging
+│   ├── drive.js          # felles: Google-innlogging og lesing fra Drive-mappene
+│   ├── market/           # Market, leser rapportfilene
+│   └── watch/            # Watch list, leser ukefilene
 ├── 404.html
 ├── assets/style.css      # alle stiler, med lyst og mørkt tema
 ├── assets/favicon.svg
@@ -24,10 +26,10 @@ Publiseres med GitHub Pages fra `main`.
 
 ## Morning news
 
-Rapportene er private sider i Claude, oppdatert på samme adresse av planlagte oppgaver. Siden
-lenker bare til dem, med nøytrale navn, og ligger ikke i søkemotorer (`noindex`). Bare eieren kan
-åpne rapportene, innlogget på claude.ai. Innholdet publiseres aldri her, og repoet er offentlig, så
-navn på rapportene skal heller ikke stå her.
+Rapportene lages av planlagte oppgaver i Claude, som lagrer én JSON-fil per rapport i en privat
+Drive-mappe. Sidene her er bare et skall: de logger inn med Google i nettleseren og leser filene
+derfra. Innholdet publiseres aldri her, sidene ligger ikke i søkemotorer (`noindex`), og repoet er
+offentlig, så navn og ord som røper hva rapportene handler om, skal heller ikke stå her.
 
 ### Innhold i Google Drive
 
@@ -40,13 +42,18 @@ arefossa.no/              # Drive-mappa, delt med kontoen de planlagte oppgavene
 ├── photos/               # originalene til /photos/ (se Bilder)
 ├── wattsup/
 └── morning-news/
-    ├── watch/            # ukefilene uke-ÅÅÅÅ-UU.json, lest av /morning-news/watch/
-    └── market/           # til markedsrapporten, når den flyttes hit
+    ├── market/           # rapportfilene rapport-ÅÅÅÅ-MM-DD.json, lest av /morning-news/market/
+    └── watch/            # ukefilene uke-ÅÅÅÅ-UU.json, lest av /morning-news/watch/
 ```
 
-Siden `/morning-news/watch/` logger inn med Google i nettleseren og leser filene med Drive-API-et
-(`drive.readonly`). Mappe-ID-en står i `CONFIG.folderId` i `morning-news/watch/watch.js`. Lages
-en ny mappe, må både ID-en der og instruksen til oppgaven som skriver filene oppdateres.
+Innloggingen og lesingen ligger i `morning-news/drive.js` (Google Identity Services og Drive-API-et
+med `drive.readonly`). Klient-ID-en kommer fra Google Cloud-prosjektet `arefossa-no`, som står i
+testmodus med hjelpekontoen som eneste testbruker. Tilgangsnøkkelen huskes i fanen til den går ut,
+så én innlogging holder for begge sidene. Mappe-ID-en står øverst i `market.js` og `watch.js`.
+Lages en ny mappe, må både ID-en der og instruksen til oppgaven som skriver filene oppdateres.
+
+Lokalt kan visningen testes uten innlogging: `?file=<adresse>` (gjerne flere) på localhost viser
+de filene i stedet.
 
 ## Bilder
 
