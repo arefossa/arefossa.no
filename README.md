@@ -1,16 +1,21 @@
 # arefossa.no
 
 Personlig forside for arefossa.no: About, Photos, WattsUp og Morning news. Ren HTML og CSS, uten
-byggesteg, eksterne fonter eller skript. Publiseres med GitHub Pages fra `main`.
+byggesteg eller eksterne fonter. Skript bare der det trengs: bildevisningen på `/photos/`.
+Publiseres med GitHub Pages fra `main`.
 
 ```
 ├── index.html            # forsiden med de fire valgene
 ├── about/index.html      # About (lorem ipsum foreløpig)
-├── photos/index.html     # Photos (plassholdere foreløpig)
+├── photos/               # Photos: miniatyrer øverst, valgt bilde stort under
+│   ├── index.html
+│   ├── photos.js         # bytter bilde (klikk, piltaster, sveip), valgt bilde i #adressen
+│   └── img/              # nettversjonene, laget med tools/prepare_photos.py
 ├── morning-news/         # lenker til rapportene fra de planlagte oppgavene i Claude
 ├── 404.html
 ├── assets/style.css      # alle stiler, med lyst og mørkt tema
 ├── assets/favicon.svg
+├── tools/prepare_photos.py
 ├── CNAME                 # hoveddomenet for GitHub Pages (se under)
 └── .nojekyll             # filene serveres som de er
 ```
@@ -21,6 +26,27 @@ Rapportene er private sider i Claude, oppdatert på samme adresse av planlagte o
 lenker bare til dem, med nøytrale navn, og ligger ikke i søkemotorer (`noindex`). Bare eieren kan
 åpne rapportene, innlogget på claude.ai. Innholdet publiseres aldri her, og repoet er offentlig, så
 navn på rapportene skal heller ikke stå her.
+
+## Bilder
+
+Originalene ligger i den private Drive-mappa `arefossa.no/photos`. Bare nettversjonene ligger
+her, laget med `tools/prepare_photos.py` (krever Pillow: `pip install pillow`):
+
+- `<navn>-960.jpg` og `<navn>-1920.jpg` til det store bildet, `<navn>-thumb.jpg` (400 px) til
+  miniatyren.
+- All metadata fjernes (EXIF og XMP: kamera, tidspunkt og eventuelt GPS), fordi repoet er
+  offentlig. Bare fargeprofilen beholdes, så fargene blir riktige (bildene fra Bilder på Mac er
+  Display P3).
+
+Slik legges et nytt bilde til:
+
+1. `python tools/prepare_photos.py <original.jpeg> <ÅÅÅÅ-MM-DD-navn>`. Skriptet skriver ut målene
+   og når bildet ble tatt.
+2. I `photos/index.html`: legg til en miniatyr i `.thumbs` og en `<figure>` i `.stage`, med samme
+   id. Skriv en alt-tekst som beskriver bildet, og en kort bildetekst. Telleren («2 / 5») setter
+   skriptet selv.
+
+Uten skript virker miniatyrene som lenker til `#id`, og CSS viser bildet med den id-en.
 
 ## Se siden lokalt
 

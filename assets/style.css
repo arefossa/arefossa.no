@@ -11,6 +11,8 @@
   --font-display: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
   --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Consolas, monospace;
+  /* Bakgrunnen bak bildene på /photos/, lik i lyst og mørkt tema. */
+  --stage: #0c100f;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -124,26 +126,107 @@ h2 { font-size: 1.35rem; }
 .tile p { margin: 0; color: var(--muted); font-size: 0.95rem; }
 .tile .meta { font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); }
 
-/* Bilder: plassholdere til ekte bilder kommer. */
-.gallery {
+/* Bilder: miniatyrer øverst, valgt bilde stort under. Rammen har fast format (3:2) og mørk
+   bakgrunn i begge temaer, så siden ikke hopper når bilder med ulikt format byttes. */
+.viewer { display: grid; gap: 1rem; min-width: 0; }
+.thumbs {
+  position: relative;
   list-style: none;
   margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
-  gap: 1rem;
+  padding: 4px 4px 6px;
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
 }
-.gallery figure { margin: 0; display: grid; gap: 0.4rem; }
-.placeholder {
-  aspect-ratio: 4 / 3;
-  max-width: 100%;
+.thumbs li { flex: 0 0 auto; scroll-snap-align: start; }
+.thumbs a {
+  display: block;
+  width: 8.5rem;
+  aspect-ratio: 3 / 2;
   border-radius: 4px;
-  background:
-    linear-gradient(160deg, transparent 55%, var(--accent-soft) 55%),
-    linear-gradient(200deg, var(--line) 40%, var(--accent-soft) 40%);
-  border: 1px solid var(--line);
+  overflow: hidden;
+  background: var(--stage);
+  opacity: 0.6;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition: opacity 0.15s ease, outline-color 0.15s ease;
 }
-.gallery figcaption { font-size: 0.85rem; color: var(--muted); }
+.thumbs a:hover { opacity: 1; }
+.thumbs a[aria-current="true"] { opacity: 1; outline-color: var(--accent); }
+.thumbs a:focus-visible { opacity: 1; outline: 3px solid var(--accent); }
+.thumbs img { display: block; width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 559px) {
+  .thumbs a { width: 6.5rem; }
+}
+
+.stage { position: relative; }
+.stage figure { margin: 0; display: none; gap: 0.6rem; }
+.viewer.js .stage figure.is-current,
+.viewer:not(.js) .stage figure:target,
+.viewer:not(.js) .stage:not(:has(figure:target)) figure:first-of-type { display: grid; }
+/* Rammen er aldri høyere enn det meste av skjermen. Da blir den bredere enn 3:2, og bildet får
+   mørke kanter på sidene i stedet. */
+.frame {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  max-height: 80vh;
+  max-height: 80svh;
+  background: var(--stage);
+  border-radius: 6px;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+.frame img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.stage figcaption { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 1rem; }
+.stage .title { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; }
+.stage .when, .stage .count { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); }
+.stage .count { margin-left: auto; }
+
+/* Bla-knappene ligger over rammen, midt på høyden. Bare med skript. */
+.nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  max-height: 80vh;
+  max-height: 80svh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.6rem;
+  pointer-events: none;
+}
+.viewer:not(.js) .nav { display: none; }
+.nav button {
+  pointer-events: auto;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0 0 0.15rem;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 0.45);
+  color: #fff;
+  font: 1.6rem/1 var(--font-body);
+  cursor: pointer;
+}
+.nav button:hover { background: rgb(0 0 0 / 0.7); }
+.nav button:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 /* Morning news: lenker til rapportene i Claude. */
 .reports { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; max-width: 40rem; }
@@ -163,6 +246,6 @@ h2 { font-size: 1.35rem; }
 .site-footer .wrap { padding-block: 1.5rem; font-size: 0.85rem; color: var(--muted); }
 
 @media (prefers-reduced-motion: reduce) {
-  .tile { transition: none; }
+  .tile, .thumbs a { transition: none; }
   .tile:hover { transform: none; }
 }

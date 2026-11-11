@@ -24,24 +24,51 @@
   <main>
     <div class="wrap">
       <p class="eyebrow">Photos</p>
-      <h1>Lorem ipsum</h1>
-      <p class="lede">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-        doloremque laudantium.</p>
+      <h1>A November morning</h1>
+      <p class="lede">Blue hour and first light on 7 November 2026.</p>
 
-      <!-- Plassholdere: bytt hver .placeholder med <img src="..." alt="..."> når bildene er klare. -->
-      <ul class="gallery">
-        <li><figure><div class="placeholder" role="img" aria-label="Placeholder"></div><figcaption>Lorem ipsum dolor</figcaption></figure></li>
-        <li><figure><div class="placeholder" role="img" aria-label="Placeholder"></div><figcaption>Consectetur adipiscing</figcaption></figure></li>
-        <li><figure><div class="placeholder" role="img" aria-label="Placeholder"></div><figcaption>Sed do eiusmod tempor</figcaption></figure></li>
-        <li><figure><div class="placeholder" role="img" aria-label="Placeholder"></div><figcaption>Ut labore et dolore</figcaption></figure></li>
-        <li><figure><div class="placeholder" role="img" aria-label="Placeholder"></div><figcaption>Magna aliqua ut enim</figcaption></figure></li>
-        <li><figure><div class="placeholder" role="img" aria-label="Placeholder"></div><figcaption>Quis nostrud exercitation</figcaption></figure></li>
-      </ul>
+      <!-- Miniatyrene velger hvilket bilde som vises stort. Uten skript virker de som lenker til
+           #id, og CSS viser bildet med den id-en. Nye bilder: se README (Bilder). -->
+      <div class="viewer" id="viewer">
+        <ul class="thumbs" aria-label="Choose a photo">
+          <li><a href="#moon" aria-current="true"><img src="/photos/img/2026-11-07-moon-thumb.jpg" width="400" height="267" alt="Crescent moon"></a></li>
+          <li><a href="#boat"><img src="/photos/img/2026-11-07-boat-thumb.jpg" width="400" height="267" alt="Upturned boat"></a></li>
+          <li><a href="#fox"><img src="/photos/img/2026-11-07-fox-thumb.jpg" width="400" height="225" alt="Fox in the sun"></a></li>
+          <li><a href="#fox-2"><img src="/photos/img/2026-11-07-fox-2-thumb.jpg" width="400" height="225" alt="Fox on the move"></a></li>
+        </ul>
+
+        <div class="stage">
+          <figure id="moon">
+            <div class="frame"><img src="/photos/img/2026-11-07-moon-960.jpg" srcset="/photos/img/2026-11-07-moon-960.jpg 960w, /photos/img/2026-11-07-moon-1920.jpg 1920w" sizes="(min-width: 62rem) 59.5rem, calc(100vw - 40px)" width="1920" height="1280" fetchpriority="high" alt="A thin crescent moon and a bright point of light above the dark outline of a hill, in a deep blue sky that turns orange at the horizon."></div>
+            <figcaption><span class="title">Crescent moon</span> <span class="when">7 Nov 2026 · 08:17</span> <span class="count"></span></figcaption>
+          </figure>
+          <figure id="boat">
+            <div class="frame"><img src="/photos/img/2026-11-07-boat-960.jpg" srcset="/photos/img/2026-11-07-boat-960.jpg 960w, /photos/img/2026-11-07-boat-1920.jpg 1920w" sizes="(min-width: 62rem) 59.5rem, calc(100vw - 40px)" width="1920" height="1280" loading="lazy" alt="An upturned boat on bare rock in the blue hour, below a rocky ridge with a small cairn on top."></div>
+            <figcaption><span class="title">Upturned boat</span> <span class="when">7 Nov 2026 · 08:18</span> <span class="count"></span></figcaption>
+          </figure>
+          <figure id="fox">
+            <div class="frame"><img src="/photos/img/2026-11-07-fox-960.jpg" srcset="/photos/img/2026-11-07-fox-960.jpg 960w, /photos/img/2026-11-07-fox-1920.jpg 1920w" sizes="(min-width: 62rem) 59.5rem, calc(100vw - 40px)" width="1920" height="1080" loading="lazy" alt="A red fox sitting on a frosty rock in low morning sun, looking towards the camera."></div>
+            <figcaption><span class="title">Fox in the sun</span> <span class="when">7 Nov 2026 · 10:02</span> <span class="count"></span></figcaption>
+          </figure>
+          <figure id="fox-2">
+            <div class="frame"><img src="/photos/img/2026-11-07-fox-2-960.jpg" srcset="/photos/img/2026-11-07-fox-2-960.jpg 960w, /photos/img/2026-11-07-fox-2-1920.jpg 1920w" sizes="(min-width: 62rem) 59.5rem, calc(100vw - 40px)" width="1920" height="1080" loading="lazy" alt="A red fox with a white-tipped tail walking between boulders and frosted grass."></div>
+            <figcaption><span class="title">Fox on the move</span> <span class="when">7 Nov 2026 · 10:03</span> <span class="count"></span></figcaption>
+          </figure>
+
+          <div class="nav">
+            <button type="button" data-step="-1" aria-label="Previous photo"><span aria-hidden="true">‹</span></button>
+            <button type="button" data-step="1" aria-label="Next photo"><span aria-hidden="true">›</span></button>
+          </div>
+        </div>
+        <p class="sr-only" id="viewer-status" aria-live="polite"></p>
+      </div>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">© 2026 Are Fosså</div>
   </footer>
+
+  <script src="/photos/photos.js"></script>
 </body>
 </html>
