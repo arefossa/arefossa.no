@@ -1,0 +1,168 @@
+/* arefossa.no: en enkel personlig forside. Ingen eksterne fonter eller skript, så siden laster
+   raskt og sender ingenting til andre. Fargene er tokens, med mørkt tema fra systemet. */
+:root {
+  --bg: #f2f4f1;
+  --surface: #ffffff;
+  --fg: #1b2420;
+  --muted: #56625c;
+  --line: #d8ded9;
+  --accent: #1f5c4a;
+  --accent-soft: #e2ece7;
+  --font-display: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111715;
+    --surface: #18201d;
+    --fg: #e2e9e5;
+    --muted: #9aa8a1;
+    --line: #2a3531;
+    --accent: #7cc6aa;
+    --accent-soft: #1d2c27;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+}
+a { color: var(--accent); }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+.wrap {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+
+/* Toppen: navnet til venstre, menyen til høyre. Brytes til to linjer på smale skjermer. */
+.site-header { border-bottom: 1px solid var(--line); background: var(--surface); }
+.site-header .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  padding-block: 1.1rem;
+}
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--fg);
+  text-decoration: none;
+}
+.site-nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.4rem; }
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+  white-space: nowrap;
+  padding-block: 0.15rem;
+  border-bottom: 2px solid transparent;
+}
+.site-nav a:hover { color: var(--fg); }
+.site-nav a[aria-current="page"] { color: var(--fg); border-bottom-color: var(--accent); }
+.ext { font-size: 0.8em; }
+
+main .wrap { padding-block: 3rem 4rem; display: grid; gap: 2rem; }
+.eyebrow {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1, h2 { font-family: var(--font-display); line-height: 1.15; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); }
+h2 { font-size: 1.35rem; }
+.lede { margin: 0; font-size: 1.15rem; color: var(--muted); max-width: 38rem; }
+.prose { display: grid; gap: 1rem; max-width: 40rem; }
+.prose p { margin: 0; }
+
+/* Forsiden: de fire valgene som fliser, fire, to eller én i bredden, så ingen står alene. */
+.tiles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 560px) {
+  .tiles { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 960px) {
+  .tiles { grid-template-columns: repeat(4, 1fr); }
+}
+.tile {
+  display: grid;
+  gap: 0.4rem;
+  height: 100%;
+  padding: 1.3rem 1.4rem 1.4rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--fg);
+  text-decoration: none;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.tile:hover { border-color: var(--accent); transform: translateY(-2px); }
+.tile h2 { font-size: 1.25rem; }
+.tile p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.tile .meta { font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); }
+
+/* Bilder: plassholdere til ekte bilder kommer. */
+.gallery {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+  gap: 1rem;
+}
+.gallery figure { margin: 0; display: grid; gap: 0.4rem; }
+.placeholder {
+  aspect-ratio: 4 / 3;
+  max-width: 100%;
+  border-radius: 4px;
+  background:
+    linear-gradient(160deg, transparent 55%, var(--accent-soft) 55%),
+    linear-gradient(200deg, var(--line) 40%, var(--accent-soft) 40%);
+  border: 1px solid var(--line);
+}
+.gallery figcaption { font-size: 0.85rem; color: var(--muted); }
+
+/* Morning news: lenker til rapportene i Claude. */
+.reports { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; max-width: 40rem; }
+.report { display: grid; gap: 0.35rem; }
+.note {
+  margin: 0;
+  padding: 0.8rem 1rem;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: 0 4px 4px 0;
+  color: var(--fg);
+  font-size: 0.92rem;
+  max-width: 40rem;
+}
+
+.site-footer { border-top: 1px solid var(--line); }
+.site-footer .wrap { padding-block: 1.5rem; font-size: 0.85rem; color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  .tile { transition: none; }
+  .tile:hover { transform: none; }
+}
