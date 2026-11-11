@@ -1,7 +1,8 @@
 # arefossa.no
 
 Personlig forside for arefossa.no: About, Photos, WattsUp og Morning news. Ren HTML og CSS, uten
-byggesteg eller eksterne fonter. Skript bare der det trengs: bildevisningen på `/photos/`.
+byggesteg eller eksterne fonter. Skript bare der det trengs: bildevisningen på `/photos/`, og
+`/morning-news/watch/`, som også laster Googles innlogging.
 Publiseres med GitHub Pages fra `main`.
 
 ```
@@ -11,7 +12,8 @@ Publiseres med GitHub Pages fra `main`.
 │   ├── index.html
 │   ├── photos.js         # bytter bilde (klikk, piltaster, sveip), valgt bilde i #adressen
 │   └── img/              # nettversjonene, laget med tools/prepare_photos.py
-├── morning-news/         # lenker til rapportene fra de planlagte oppgavene i Claude
+├── morning-news/         # rapportene fra de planlagte oppgavene i Claude
+│   └── watch/            # Watch list, leser ukefilene fra Google Drive etter innlogging
 ├── 404.html
 ├── assets/style.css      # alle stiler, med lyst og mørkt tema
 ├── assets/favicon.svg
@@ -26,6 +28,25 @@ Rapportene er private sider i Claude, oppdatert på samme adresse av planlagte o
 lenker bare til dem, med nøytrale navn, og ligger ikke i søkemotorer (`noindex`). Bare eieren kan
 åpne rapportene, innlogget på claude.ai. Innholdet publiseres aldri her, og repoet er offentlig, så
 navn på rapportene skal heller ikke stå her.
+
+### Innhold i Google Drive
+
+Innhold som ikke skal ligge i et offentlig repo, ligger i en privat Drive-mappe, `arefossa.no`.
+Mappene der følger stiene på siden, så det er lett å se hvor en fil hører hjemme:
+
+```
+arefossa.no/              # Drive-mappa, delt med kontoen de planlagte oppgavene bruker
+├── about/
+├── photos/               # originalene til /photos/ (se Bilder)
+├── wattsup/
+└── morning-news/
+    ├── watch/            # ukefilene uke-ÅÅÅÅ-UU.json, lest av /morning-news/watch/
+    └── market/           # til markedsrapporten, når den flyttes hit
+```
+
+Siden `/morning-news/watch/` logger inn med Google i nettleseren og leser filene med Drive-API-et
+(`drive.readonly`). Mappe-ID-en står i `CONFIG.folderId` i `morning-news/watch/watch.js`. Lages
+en ny mappe, må både ID-en der og instruksen til oppgaven som skriver filene oppdateres.
 
 ## Bilder
 

@@ -1,0 +1,95 @@
+/* Watch list: ukene som kort med treff og bom, vektet som krav, viktig og lite. Bygger på
+   fargene i /assets/style.css og legger til treff (grønn) og bom (oransje). */
+:root {
+  --hit: #256b3c;
+  --hit-bg: #e6f2e9;
+  --miss: #a4570b;
+  --miss-bg: #fbefe2;
+  --chip: #eaefec;
+  --warn: #a4570b;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --hit: #8fd3a2;
+    --hit-bg: #173022;
+    --miss: #f0a85a;
+    --miss-bg: #2d2215;
+    --chip: #22302b;
+    --warn: #f0a85a;
+  }
+}
+
+.watch { max-width: 48rem; }
+.watch h2 { font-size: 1.2rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6rem; }
+.watch h2 .date { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); font-weight: 400; }
+.watch section { display: grid; gap: 0.75rem; }
+.watch .note { margin: 0; color: var(--muted); font-size: 0.92rem; }
+#content { display: grid; gap: 2.2rem; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; font-size: 0.85rem; color: var(--muted); }
+.legend > span { display: inline-flex; align-items: baseline; gap: 0.4rem; }
+
+.signin { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; }
+.signin[hidden] { display: none; }
+.button {
+  font: inherit;
+  font-weight: 600;
+  padding: 0.55rem 1rem;
+  border-radius: 4px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--surface);
+  cursor: pointer;
+}
+.button:disabled { opacity: 0.5; cursor: wait; }
+.button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.status { margin: 0; font-size: 0.88rem; color: var(--muted); }
+
+.cards { display: grid; gap: 0.8rem; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 1rem 1.1rem;
+  min-width: 0;
+}
+.card.wild { background: var(--accent-soft); border-color: transparent; }
+.soon .card { border-left: 3px solid var(--warn); }
+.card h3 { margin: 0; font-size: 1.02rem; font-family: var(--font-body); }
+.card h3 a { text-decoration: none; }
+.card h3 a:hover, .card h3 a:focus-visible { text-decoration: underline; }
+.meta { display: flex; flex-wrap: wrap; gap: 0.2rem 0.9rem; margin: 0.15rem 0 0.7rem; font-size: 0.85rem; color: var(--muted); }
+.meta .due { font-family: var(--font-mono); color: var(--fg); }
+.soon .meta .due { color: var(--warn); }
+
+.fit { display: grid; grid-template-columns: 1fr; gap: 0.7rem 1.2rem; }
+@media (min-width: 620px) { .fit { grid-template-columns: 1fr 1fr; } }
+.fit h4 { margin: 0 0 0.25rem; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.fit .hits h4 { color: var(--hit); }
+.fit .misses h4 { color: var(--miss); }
+.fit ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.3rem; }
+.fit li { display: grid; grid-template-columns: 1.1em 1fr auto; gap: 0.1rem 0.4rem; align-items: baseline; font-size: 0.9rem; line-height: 1.4; }
+.fit li::before { font-family: var(--font-mono); font-weight: 600; }
+.fit .hits li::before { content: "+"; color: var(--hit); }
+.fit .misses li::before { content: "−"; color: var(--miss); }
+.fit li.none { color: var(--muted); }
+.fit li.none::before { content: ""; }
+.w { font-family: var(--font-mono); font-size: 0.7rem; padding: 0.05rem 0.4rem; border-radius: 3px; background: var(--chip); color: var(--muted); white-space: nowrap; }
+.w.krav { font-weight: 600; color: var(--fg); }
+.fit .hits .w.krav { background: var(--hit-bg); color: var(--hit); }
+.fit .misses .w.krav { background: var(--miss-bg); color: var(--miss); }
+
+.sum { margin: 0.7rem 0 0; padding-top: 0.5rem; border-top: 1px dashed var(--line); display: flex; flex-wrap: wrap; gap: 0.2rem 0.9rem; font-size: 0.82rem; color: var(--muted); }
+.sum .flag { color: var(--miss); font-weight: 600; }
+.sum .ok { color: var(--hit); font-weight: 600; }
+.card .tip { margin: 0.5rem 0 0; font-size: 0.85rem; color: var(--muted); }
+
+.sources { margin: 0; padding-left: 1.1rem; font-size: 0.9rem; display: grid; gap: 0.2rem; }
+.history details { border-top: 1px solid var(--line); padding: 0.5rem 0; }
+.history summary { cursor: pointer; font-weight: 500; }
+.history summary .date { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); margin-left: 0.5rem; font-weight: 400; }
+.history ul { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; gap: 0.35rem; }
+.history li { display: flex; flex-wrap: wrap; gap: 0.1rem 0.7rem; align-items: baseline; font-size: 0.9rem; }
+.history .who { color: var(--muted); font-size: 0.85rem; }
+.history .flag { color: var(--miss); font-size: 0.8rem; font-weight: 600; }
+.message { margin: 0; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; color: var(--muted); }

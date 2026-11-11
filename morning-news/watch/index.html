@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Watch list · Are Bue Fosså</title>
+  <!-- Innholdet ligger i en privat Google Drive-mappe og hentes etter innlogging. Siden selv er
+       et tomt skall og skal ikke i søkemotorer. -->
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="/morning-news/watch/watch.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">Are Bue Fosså</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="/about/">About</a>
+        <a href="/photos/">Photos</a>
+        <a href="https://wattsup.arefossa.no/">WattsUp <span class="ext" aria-hidden="true">↗</span></a>
+        <a href="/morning-news/" aria-current="page">Morning news</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap watch">
+      <p class="eyebrow">Morning news</p>
+      <h1>Watch list</h1>
+      <p class="lede" id="intro"></p>
+      <div class="legend" aria-label="Vekt">
+        <span><span class="w krav">krav</span> må være på plass, fra dem eller fra deg (som sted)</span>
+        <span><span class="w">viktig</span> veier tungt</span>
+        <span><span class="w">lite</span> pluss eller minus i kanten</span>
+      </div>
+      <div class="signin" id="signin">
+        <button type="button" class="button" id="login">Logg inn med Google</button>
+        <p class="status" id="status" aria-live="polite">Innholdet er privat. Logg inn for å se det.</p>
+      </div>
+      <div id="content"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap" id="footer">© 2026 Are Bue Fosså</div>
+  </footer>
+
+  <script src="https://accounts.google.com/gsi/client" async></script>
+  <script src="/morning-news/watch/watch.js"></script>
+</body>
+</html>
