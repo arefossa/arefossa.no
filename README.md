@@ -6,7 +6,7 @@ Publiseres med GitHub Pages fra `main`.
 
 ```
 ├── index.html            # forsiden med de fire valgene
-├── about/index.html      # About (lorem ipsum foreløpig)
+├── about/index.html      # About: kort bio
 ├── photos/               # Photos: miniatyrer øverst, valgt bilde stort under
 │   ├── index.html
 │   ├── photos.js         # bytter bilde (klikk, piltaster, sveip), valgt bilde i #adressen
