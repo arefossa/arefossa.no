@@ -11,7 +11,7 @@ byggesteg, eksterne fonter eller skript. Publiseres med GitHub Pages fra `main`.
 ├── 404.html
 ├── assets/style.css      # alle stiler, med lyst og mørkt tema
 ├── assets/favicon.svg
-├── CNAME                 # arefossa.no, for GitHub Pages
+├── CNAME                 # hoveddomenet for GitHub Pages (se under)
 └── .nojekyll             # filene serveres som de er
 ```
 
@@ -50,6 +50,11 @@ e-post. Når arefossa.no peker til GitHub, bør `+a` tas bort:
 ```
 v=spf1 +mx +ip4:185.126.36.19 include:_spf.spamprotection.no ~all
 ```
+
+Hoveddomenet er `www.arefossa.no` (fila `CNAME`). GitHub sender arefossa.no videre dit. Det ble
+valgt 11.11.2026 fordi GitHubs DNS-sjekk fortsatt husket den gamle adressen til arefossa.no (TTL 4
+timer), mens www allerede var godkjent og kunne få HTTPS med en gang. Vil man ha arefossa.no som
+hoveddomene, endres `CNAME` når GitHub godtar det (Settings → Pages viser grønn DNS-sjekk).
 
 Når DNS-en er på plass, slå på «Enforce HTTPS» under Settings → Pages. Bekreft også domenet under
 GitHub-kontoens Settings → Pages (verified domains), så ingen andre kan ta det i bruk på GitHub.
