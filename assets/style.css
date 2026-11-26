@@ -240,9 +240,15 @@ h2 { font-size: 1.35rem; }
   background: var(--stage);
   border-radius: 6px;
   overflow: hidden;
+  /* Siden kan rulles loddrett over bildet, men knip i rammen zoomer bildet (photos.js), ikke siden.
+     Når bildet er zoomet, tar skriptet alle bevegelser, så det kan dras i alle retninger. */
   touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
 }
-.frame img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.frame.is-zoomed { touch-action: none; cursor: grab; }
+.frame.is-zoomed:active { cursor: grabbing; }
+.frame img { display: block; width: 100%; height: 100%; object-fit: contain; transform-origin: 0 0; -webkit-user-drag: none; }
 .stage figcaption { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 1rem; }
 .stage .title { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; }
 .stage .when, .stage .count { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); }
