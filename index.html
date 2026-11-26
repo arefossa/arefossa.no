@@ -24,20 +24,23 @@
     <div class="wrap">
       <p class="eyebrow">arefossa.no</p>
       <h1>Are Bue Fosså</h1>
-      <ul class="facts">
-        <li><strong>Name:</strong> Are Bue Fosså</li>
-        <li><strong>Education:</strong> Masters of Information Science, University of Bergen</li>
-        <li><strong>Occupation:</strong> Data engineer, Chief consultant at Experis</li>
-        <li><strong>Fields:</strong> Data engineering, dataplattform, data warehousing, data analytics, reporting, ...</li>
-        <li><strong>Industries:</strong> Petroleum, aquaculture, carbon capture, public grants, public transport, ...  </li>
-        <li><strong>Data:</strong> Structured data, streaming data, semi structured  </li>
-      </ul>
+      <div class="bio">
+        <img class="portrait" src="/assets/portrait.jpg" alt="Are Bue Fosså" width="200" height="200">
+        <ul class="facts">
+          <li><strong>Name:</strong> Are Bue Fosså</li>
+          <li><strong>Education:</strong> Masters of Information Science, University of Bergen</li>
+          <li><strong>Occupation:</strong> Data engineer, Chief consultant at Experis</li>
+          <li><strong>Fields:</strong> Data engineering, dataplattform, data warehousing, data analytics, reporting</li>
+          <li><strong>Industries:</strong> Petroleum, aquaculture, carbon capture, public grants, public transport</li>
+          <li><strong>Data:</strong> Structured data, streaming data, semi structured</li>
+        </ul>
+      </div>
 
       <ul class="tiles">
         <li>
           <a class="tile" href="/photos/">
             <h2>Photos</h2>
-            <p>Gallery of photos</p>
+            <p>Gallery of photos. Just a fun little hobby.</p>
           </a>
         </li>
         <li>
@@ -54,6 +57,39 @@
           </a>
         </li>
       </ul>
+
+      <section class="experience" aria-labelledby="experience-title">
+        <h2 id="experience-title">Work experience</h2>
+        <div class="prose">
+          <p>I am a data engineer and consultant, working with data warehouses and data platforms from
+            source systems to the reports people use every day. In my current consultancy I also lead the
+            cloud and data area.</p>
+          <p>I have extensive experience from the petroleum industry, with an automated data warehouse that
+            grew to almost 100 data sources and more than 10,000 database objects. I built ETL and business
+            logic in SQL Server, SSIS and SSAS, and delivered reporting on production, emissions, resource
+            allocation and projects. As release manager I ran peer reviews and deployments. I also added data
+            quality tests and a Power BI report that diagnoses failures in daily operations and suggests
+            fixes.</p>
+          <p>In carbon capture and storage, I work with streaming data. I build a platform in Microsoft Fabric
+            and Azure where sensor data from the CO2 transport and storage chain streams through Event Hub
+            into Eventhouse, which drives real-time monitoring in Power BI and Grafana. In the lakehouse,
+            PySpark and dbt turn the same data into traceable data for regulatory reporting, with CI/CD in
+            Azure DevOps.</p>
+          <p>In aquaculture, I designed and set up data platforms in Azure for three salmon farming companies.
+            I combined production data with financial data, automated the allocation of costs across sites
+            based on production volume, and built the backend for an app where operators register sea lice
+            counts and treatments. I was among the first to use the production system's new REST API for BI,
+            and gave input to its design.</p>
+          <p>For a public funding agency, I worked as data engineer and architect on a platform in Azure and
+            Microsoft Fabric. We added new sources such as ERP and public registers, refactored heavy data
+            models and cut run times from 20 hours to 2.</p>
+          <p>For an offshore engineering contractor, I built reporting on resources and hours across projects
+            onshore and at the yard. In public transport, I built KPI reporting for a transport authority and a
+            light rail operator, covering punctuality, ridership, seat occupancy and the bonus and penalty
+            calculations in the operator contracts. For a data centre company, I maintained and extended
+            financial reporting and trained users in Power BI.</p>
+        </div>
+      </section>
     </div>
   </main>
 

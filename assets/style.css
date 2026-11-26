@@ -94,8 +94,30 @@ h2 { font-size: 1.35rem; }
 .prose { display: grid; gap: 1rem; max-width: 40rem; }
 .prose p { margin: 0; }
 
+/* Forsiden: Work experience under flisene, litt ekstra luft over og en tynn strek som skille. */
+.experience { display: grid; gap: 1rem; margin-top: 1rem; padding-top: 2rem; border-top: 1px solid var(--line); }
+.experience .prose { max-width: none; }
+
+/* Forsiden: portrettet til venstre for punktlisten, over den på smale skjermer. */
+.bio { display: grid; gap: 1.5rem; align-items: center; }
+@media (min-width: 640px) {
+  .bio { grid-template-columns: 200px 1fr; gap: 2rem; }
+}
+.portrait {
+  display: block;
+  width: 200px;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+
 /* Forsiden: punktlisten om meg. */
-.facts { margin: 0; padding-left: 1.25rem; display: grid; gap: 0.4rem; max-width: 40rem; color: var(--muted); font-size: 1.05rem; }
+/* Ingen maksbredde: listen får hele plassen ved siden av bildet, like bredt som flisene under.
+   Blir vinduet smalt, brytes linjene, og text-wrap: pretty hindrer at ett ord står alene. */
+.facts { margin: 0; padding-left: 1.25rem; display: grid; gap: 0.4rem; color: var(--muted); font-size: 1.05rem; text-wrap: pretty; }
 .facts strong { color: var(--fg); font-weight: 600; }
 
 /* Forsiden: de tre valgene som fliser, tre eller én i bredden, så ingen står alene. */
