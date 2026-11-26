@@ -124,7 +124,8 @@ h2 { font-size: 1.35rem; }
 .facts { margin: 0; padding-left: 1.25rem; display: grid; gap: 0.4rem; color: var(--muted); font-size: 1.05rem; text-wrap: pretty; }
 .facts strong { color: var(--fg); font-weight: 600; }
 
-/* Forsiden: de tre valgene som fliser, tre eller én i bredden, så ingen står alene. */
+/* Fliser (forsiden og Projects): alle på én rad som fyller hele bredden, uansett om det er to eller
+   tre. På smale skjermer står de under hverandre, så ingen står alene på en rad. */
 .tiles {
   list-style: none;
   margin: 0;
@@ -134,7 +135,7 @@ h2 { font-size: 1.35rem; }
   gap: 1rem;
 }
 @media (min-width: 720px) {
-  .tiles { grid-template-columns: repeat(3, 1fr); }
+  .tiles { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 1fr; }
 }
 .tile {
   display: grid;
