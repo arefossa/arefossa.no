@@ -16,6 +16,7 @@
   let gesture = null;             // tilstand ved starten av knip eller drag
   let swipe = null;               // startpunkt for sveip, bare med én finger og uten zoom
   let lastTap = 0;
+  let lastTouch = 0;              // tidspunkt for siste touch, så dblclick fra touch kan ignoreres
 
   // Hold valgt miniatyr synlig i stripa uten å flytte resten av siden.
   function reveal(link) {
@@ -62,9 +63,10 @@
   // musa) drar bildet rundt når det er zoomet. Uten zoom blar et vannrett sveip på minst 40 px.
   // Zoomen nullstilles når man bytter bilde.
 
-  const frame = () => figures[current].querySelector(".frame");
-  const img = () => frame().querySelector("img");
-  const local = (e) => { const r = frame().getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+  // Vanlige funksjoner (ikke const), så show() kan bruke dem allerede når siden laster.
+  function frame() { return figures[current].querySelector(".frame"); }
+  function img() { return frame().querySelector("img"); }
+  function local(e) { const r = frame().getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
 
   function apply(animate = false) {
     const f = frame(), w = f.clientWidth, h = f.clientHeight;
@@ -106,6 +108,7 @@
   const stage = viewer.querySelector(".stage");
   stage.addEventListener("pointerdown", (e) => {
     if (!e.target.closest(".frame")) return;
+    if (e.pointerType !== "mouse") lastTouch = Date.now();
     pointers.set(e.pointerId, local(e));
     e.target.setPointerCapture?.(e.pointerId);
     swipe = pointers.size === 1 && z.s === 1 && e.pointerType !== "mouse" ? { x: e.clientX, y: e.clientY } : null;
@@ -161,9 +164,24 @@
   stage.addEventListener("dblclick", (e) => {
     if (!e.target.closest(".frame")) return;
     e.preventDefault();
+    // Touch har eget dobbelttrykk over. Chrome sender i tillegg dblclick, som ellers ville zoomet tilbake.
+    if (Date.now() - lastTouch < 1000) return;
     toggleZoom(local(e));
   });
   window.addEventListener("resize", () => { if (z.s > 1) resetZoom(); });
+
+  // Hindre at nettleseren zoomer hele siden når man kniper i rammen. touch-action i CSS holder for
+  // Chrome, men Safari på iPhone ser bort fra den for knip, så her stoppes det også i skriptet:
+  // touchmove med to fingre (eller når bildet er zoomet), og Safaris egne gesture-hendelser.
+  const inFrame = (e) => e.target instanceof Element && e.target.closest(".frame");
+  stage.addEventListener("touchmove", (e) => {
+    if (inFrame(e) && (e.touches.length > 1 || z.s > 1)) e.preventDefault();
+  }, { passive: false });
+  stage.addEventListener("touchstart", (e) => {
+    if (inFrame(e) && e.touches.length > 1) e.preventDefault();
+  }, { passive: false });
+  ["gesturestart", "gesturechange", "gestureend"].forEach((type) =>
+    stage.addEventListener(type, (e) => { if (inFrame(e)) e.preventDefault(); }, { passive: false }));
 
   // Når siden er ferdig lastet, hentes de andre bildene også, så blaingen går uten venting.
   window.addEventListener("load", () => {
