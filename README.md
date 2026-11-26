@@ -105,10 +105,14 @@ e-post. Når arefossa.no peker til GitHub, bør `+a` tas bort:
 v=spf1 +mx +ip4:185.126.36.19 include:_spf.spamprotection.no ~all
 ```
 
-Hoveddomenet er `www.arefossa.no` (fila `CNAME`). GitHub sender arefossa.no videre dit. Det ble
-valgt 11.11.2026 fordi GitHubs DNS-sjekk fortsatt husket den gamle adressen til arefossa.no (TTL 4
-timer), mens www allerede var godkjent og kunne få HTTPS med en gang. Vil man ha arefossa.no som
-hoveddomene, endres `CNAME` når GitHub godtar det (Settings → Pages viser grønn DNS-sjekk).
+Hoveddomenet er `arefossa.no` (fila `CNAME`), og GitHub sender www.arefossa.no videre dit.
+Sertifikatet dekker begge adressene.
+
+Første dag (11.11.2026) var www hoveddomene, fordi GitHubs DNS-sjekk fortsatt husket den gamle
+adressen til arefossa.no (TTL 4 timer). Sertifikatet dekket da bare www, så https://arefossa.no ga
+sertifikatfeil. Å fjerne og legge inn domenet på nytt hjalp ikke, for GitHub brukte det gamle
+sertifikatet igjen. Byttet til arefossa.no som hoveddomene fikk GitHub til å lage et nytt. Lærdom:
+sett ned TTL på DNS-postene noen timer før en flytting.
 
 Når DNS-en er på plass, slå på «Enforce HTTPS» under Settings → Pages. Bekreft også domenet under
 GitHub-kontoens Settings → Pages (verified domains), så ingen andre kan ta det i bruk på GitHub.

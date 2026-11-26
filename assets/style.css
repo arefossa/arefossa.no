@@ -94,7 +94,7 @@ h2 { font-size: 1.35rem; }
 .prose { display: grid; gap: 1rem; max-width: 40rem; }
 .prose p { margin: 0; }
 
-/* Forsiden: de fire valgene som fliser, fire, to eller én i bredden, så ingen står alene. */
+/* Forsiden: de tre valgene som fliser, tre eller én i bredden, så ingen står alene. */
 .tiles {
   list-style: none;
   margin: 0;
@@ -103,11 +103,8 @@ h2 { font-size: 1.35rem; }
   grid-template-columns: 1fr;
   gap: 1rem;
 }
-@media (min-width: 560px) {
-  .tiles { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 960px) {
-  .tiles { grid-template-columns: repeat(4, 1fr); }
+@media (min-width: 720px) {
+  .tiles { grid-template-columns: repeat(3, 1fr); }
 }
 .tile {
   display: grid;
