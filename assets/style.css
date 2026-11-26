@@ -100,25 +100,28 @@ h2 { font-size: 1.35rem; }
 .prose p { margin: 0; }
 
 /* Forsiden: Work experience under flisene, litt ekstra luft over og en tynn strek som skille. */
-.experience, .education { display: grid; gap: 1rem; margin-top: 1rem; padding-top: 2rem; border-top: 1px solid var(--line); }
+.experience, .skills, .education { display: grid; gap: 1rem; margin-top: 1rem; padding-top: 2rem; border-top: 1px solid var(--line); }
 
-/* Forsiden: Education. Ett kort per studieprogram, semestrene side om side i kortet og under
-   hverandre på smale skjermer. Kortene følger sidebredden, som alt annet. */
+/* Forsiden: Tools / technologies og semestrene i Education. En overskrift og en punktliste per
+   kategori eller semester, uten kort, og så mange kolonner som får plass. */
+.skills { gap: 1.25rem; }
+.skill-groups, .terms { display: grid; gap: 1.5rem 2rem; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); }
+.skill-group h3, .term h4 { margin: 0 0 0.4rem; font-size: 0.95rem; font-weight: 600; color: var(--fg); }
+.skill-group ul, .courses { margin: 0; padding-left: 1.25rem; display: grid; gap: 0.25rem; color: var(--muted); font-size: 0.95rem; }
+
+/* Forsiden: Education. Hver grad har eget navn og egne semestre, med ekstra luft mellom gradene. */
 .education { gap: 1.25rem; }
-.degree {
-  display: grid;
-  gap: 1rem;
-  padding: 1.3rem 1.4rem 1.4rem;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-}
+.degree { display: grid; gap: 1rem; }
+.degree + .degree { margin-top: 1rem; }
 .degree-head { display: grid; gap: 0.2rem; }
 .degree h3 { margin: 0; font-family: var(--font-display); font-size: 1.2rem; line-height: 1.2; }
 .degree .meta { margin: 0; font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); }
-.terms { display: grid; gap: 1rem 1.5rem; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); }
-.term h4 { margin: 0 0 0.4rem; font-size: 0.85rem; font-weight: 600; color: var(--fg); }
-.courses { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.3rem; color: var(--muted); font-size: 0.92rem; }
+/* Loddrett strek midt i mellomrommet mellom semestrene, i samme stil som strekene mellom seksjonene.
+   Første semester på hver rad får også en strek, men den havner utenfor og skjules av overflow, så
+   det blir bare streker mellom kolonnene og ingen på mobil. */
+.terms { overflow: hidden; }
+.term { position: relative; }
+.term::before { content: ""; position: absolute; top: 0; bottom: 0; left: -1rem; border-left: 1px solid var(--line); }
 .courses a, .courses .code { font-family: var(--font-mono); font-size: 0.82rem; margin-right: 0.35rem; }
 .courses .code { color: var(--fg); }
 
