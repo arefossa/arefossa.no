@@ -102,8 +102,8 @@ h2 { font-size: 1.35rem; }
 /* Forsiden: Work experience under flisene, litt ekstra luft over og en tynn strek som skille. */
 .experience { display: grid; gap: 1rem; margin-top: 1rem; padding-top: 2rem; border-top: 1px solid var(--line); }
 
-/* Forsiden: portrettet til venstre for punktlisten, over den på smale skjermer. */
-.bio { display: grid; gap: 1.5rem; align-items: center; }
+/* Forsiden: portrettet til venstre for punktlisten, toppen på linje med første punkt. Over listen på smale skjermer. */
+.bio { display: grid; gap: 1.5rem; align-items: start; }
 @media (min-width: 640px) {
   .bio { grid-template-columns: 200px 1fr; gap: 2rem; }
 }
