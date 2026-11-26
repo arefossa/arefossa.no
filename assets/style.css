@@ -100,7 +100,27 @@ h2 { font-size: 1.35rem; }
 .prose p { margin: 0; }
 
 /* Forsiden: Work experience under flisene, litt ekstra luft over og en tynn strek som skille. */
-.experience { display: grid; gap: 1rem; margin-top: 1rem; padding-top: 2rem; border-top: 1px solid var(--line); }
+.experience, .education { display: grid; gap: 1rem; margin-top: 1rem; padding-top: 2rem; border-top: 1px solid var(--line); }
+
+/* Forsiden: Education. Ett kort per studieprogram, semestrene side om side i kortet og under
+   hverandre på smale skjermer. Kortene følger sidebredden, som alt annet. */
+.education { gap: 1.25rem; }
+.degree {
+  display: grid;
+  gap: 1rem;
+  padding: 1.3rem 1.4rem 1.4rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.degree-head { display: grid; gap: 0.2rem; }
+.degree h3 { margin: 0; font-family: var(--font-display); font-size: 1.2rem; line-height: 1.2; }
+.degree .meta { margin: 0; font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); }
+.terms { display: grid; gap: 1rem 1.5rem; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); }
+.term h4 { margin: 0 0 0.4rem; font-size: 0.85rem; font-weight: 600; color: var(--fg); }
+.courses { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.3rem; color: var(--muted); font-size: 0.92rem; }
+.courses a, .courses .code { font-family: var(--font-mono); font-size: 0.82rem; margin-right: 0.35rem; }
+.courses .code { color: var(--fg); }
 
 /* Forsiden: portrettet til venstre for punktlisten, toppen på linje med første punkt. Over listen på smale skjermer. */
 .bio { display: grid; gap: 1.5rem; align-items: start; }
