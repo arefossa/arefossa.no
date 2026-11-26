@@ -30,6 +30,10 @@
 
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
+/* Lenker til #experience glir ned, men ikke for den som har bedt om mindre bevegelse. */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
 body {
   margin: 0;
   background: var(--bg);
@@ -90,13 +94,13 @@ main .wrap { padding-block: 3rem 4rem; display: grid; gap: 2rem; }
 h1, h2 { font-family: var(--font-display); line-height: 1.15; text-wrap: balance; margin: 0; }
 h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); }
 h2 { font-size: 1.35rem; }
-.lede { margin: 0; font-size: 1.15rem; color: var(--muted); max-width: 38rem; }
-.prose { display: grid; gap: 1rem; max-width: 40rem; }
+.lede { margin: 0; font-size: 1.15rem; color: var(--muted); }
+/* Ingen egne maksbredder: alt innhold følger .wrap, så alle sider har samme bredde som forsiden. */
+.prose { display: grid; gap: 1rem; }
 .prose p { margin: 0; }
 
 /* Forsiden: Work experience under flisene, litt ekstra luft over og en tynn strek som skille. */
 .experience { display: grid; gap: 1rem; margin-top: 1rem; padding-top: 2rem; border-top: 1px solid var(--line); }
-.experience .prose { max-width: none; }
 
 /* Forsiden: portrettet til venstre for punktlisten, over den på smale skjermer. */
 .bio { display: grid; gap: 1.5rem; align-items: center; }
@@ -252,7 +256,7 @@ h2 { font-size: 1.35rem; }
 }
 
 /* Morning news: lenker til rapportene i Claude. */
-.reports { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; max-width: 40rem; }
+.reports { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
 .report { display: grid; gap: 0.35rem; }
 .note {
   margin: 0;
@@ -262,8 +266,23 @@ h2 { font-size: 1.35rem; }
   border-radius: 0 4px 4px 0;
   color: var(--fg);
   font-size: 0.92rem;
-  max-width: 40rem;
 }
+
+/* Morning news: rapportene øverst og dagens xkcd under, i full bredde som resten av siden. */
+.morning { display: grid; gap: 1.5rem; }
+.morning-reports { display: grid; gap: 1rem; }
+.xkcd { margin: 0; gap: 0.8rem; height: auto; }
+.xkcd:hover { border-color: var(--line); transform: none; } /* boksen er ikke én lenke */
+.xkcd-head { display: grid; gap: 0.2rem; }
+.xkcd-title { color: inherit; text-decoration: none; }
+.xkcd-title:hover { text-decoration: underline; }
+/* Stripene er svart på hvitt, så de får hvit bakgrunn også i mørkt tema. */
+.xkcd img { display: block; max-width: 100%; height: auto; margin-inline: auto; background: #fff; padding: 0.5rem; border-radius: 4px; }
+.xkcd img[hidden] { display: none; }
+.xkcd figcaption { display: grid; gap: 0.5rem; }
+.xkcd-alt { font-style: italic; }
+.xkcd .xkcd-credit { font-size: 0.8rem; }
+.xkcd-credit a { color: inherit; }
 
 /* Morning news: innlogging med Google og meldinger på sidene som leser fra Drive. */
 .signin { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; }

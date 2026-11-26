@@ -16,8 +16,8 @@
       <a class="brand" href="/">Are Bue Fosså</a>
       <nav class="site-nav" aria-label="Main">
         <a href="/photos/">Photos</a>
-        <a href="https://wattsup.arefossa.no/">WattsUp <span class="ext" aria-hidden="true">↗</span></a>
-        <a href="/morning-news/" aria-current="page">Morning news</a>
+        <a href="/projects/" aria-current="page">Projects</a>
+        <a href="/#experience">Work experience</a>
       </nav>
     </div>
   </header>
@@ -29,30 +29,49 @@
       <p class="lede">The latest reports from the scheduled tasks. Each page shows the newest
         report first, with the earlier ones below.</p>
 
-      <ul class="reports">
-        <li>
-          <a class="tile report" href="/morning-news/market/">
-            <h2>Market</h2>
-            <p>The market report, a few times a week.</p>
-            <span class="meta">Google sign-in required</span>
-          </a>
-        </li>
-        <li>
-          <a class="tile report" href="/morning-news/watch/">
-            <h2>Watch list</h2>
-            <p>The weekly watch list.</p>
-            <span class="meta">Google sign-in required</span>
-          </a>
-        </li>
-      </ul>
+      <div class="morning">
+        <div class="morning-reports">
+          <ul class="reports">
+            <li>
+              <a class="tile report" href="/morning-news/market/">
+                <h2>Market</h2>
+                <p>The market report, a few times a week.</p>
+                <span class="meta">Google sign-in required</span>
+              </a>
+            </li>
+            <li>
+              <a class="tile report" href="/morning-news/watch/">
+                <h2>Watch list</h2>
+                <p>The weekly watch list.</p>
+                <span class="meta">Google sign-in required</span>
+              </a>
+            </li>
+          </ul>
 
-      <p class="note">The reports are private. They are read from a private folder after Google
-        sign-in, and one sign-in covers both pages in the same tab.</p>
+          <p class="note">The reports are private. They are read from a private folder after Google
+            sign-in, and one sign-in covers both pages in the same tab.</p>
+        </div>
+
+        <!-- Fylles av xkcd.js fra xkcd.json. xkcd er lisensiert CC BY-NC 2.5. -->
+        <figure class="tile xkcd" id="xkcd">
+          <div class="xkcd-head">
+            <h2>Daily xkcd: <a class="xkcd-title" href="https://xkcd.com/">…</a></h2>
+            <span class="meta xkcd-date">Loading today's comic…</span>
+          </div>
+          <a class="xkcd-img-link" href="https://xkcd.com/"><img alt="" hidden></a>
+          <figcaption>
+            <p class="xkcd-alt"></p>
+            <p class="xkcd-credit">From <a href="https://xkcd.com/">xkcd</a> by Randall Munroe,
+              <a href="https://creativecommons.org/licenses/by-nc/2.5/">CC BY-NC 2.5</a>.</p>
+          </figcaption>
+        </figure>
+      </div>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">© 2026 Are Bue Fosså</div>
   </footer>
+  <script src="/morning-news/xkcd.js"></script>
 </body>
 </html>

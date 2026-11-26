@@ -1,19 +1,22 @@
 # arefossa.no
 
-Personlig forside for arefossa.no: About, Photos, WattsUp og Morning news. Ren HTML og CSS, uten
+Personlig forside for arefossa.no: kort bio, Photos, Projects (WattsUp og Morning news) og Work experience. Ren HTML og CSS, uten
 byggesteg eller eksterne fonter. Skript bare der det trengs: bildevisningen på `/photos/`, og
 rapportene under `/morning-news/`, som også laster Googles innlogging.
 Publiseres med GitHub Pages fra `main`.
 
 ```
-├── index.html            # forsiden med de fire valgene
-├── about/index.html      # About: kort bio
+├── index.html            # forsiden: bio, flisene Photos, Projects og Work experience, og Work experience-teksten
+├── about/index.html      # gammel adresse, sender videre til forsiden
+├── projects/index.html   # Projects: lenker til WattsUp og Morning news
 ├── photos/               # Photos: miniatyrer øverst, valgt bilde stort under
 │   ├── index.html
 │   ├── photos.js         # bytter bilde (klikk, piltaster, sveip), valgt bilde i #adressen
 │   └── img/              # nettversjonene, laget med tools/prepare_photos.py
 ├── morning-news/         # rapportene fra de planlagte oppgavene i Claude
 │   ├── drive.js          # felles: Google-innlogging og lesing fra Drive-mappene
+│   ├── xkcd.js           # viser dagens xkcd fra xkcd.json
+│   ├── xkcd.json         # siste xkcd, oppdateres av .github/workflows/xkcd.yml hver morgen
 │   ├── market/           # Market, leser rapportfilene
 │   └── watch/            # Watch list, leser ukefilene
 ├── 404.html
