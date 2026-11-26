@@ -94,6 +94,10 @@ h2 { font-size: 1.35rem; }
 .prose { display: grid; gap: 1rem; max-width: 40rem; }
 .prose p { margin: 0; }
 
+/* Forsiden: punktlisten om meg. */
+.facts { margin: 0; padding-left: 1.25rem; display: grid; gap: 0.4rem; max-width: 40rem; color: var(--muted); font-size: 1.05rem; }
+.facts strong { color: var(--fg); font-weight: 600; }
+
 /* Forsiden: de tre valgene som fliser, tre eller én i bredden, så ingen står alene. */
 .tiles {
   list-style: none;
