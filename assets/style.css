@@ -1,13 +1,15 @@
 /* arefossa.no: en enkel personlig forside. Ingen eksterne fonter eller skript, så siden laster
-   raskt og sender ingenting til andre. Fargene er tokens, med mørkt tema fra systemet. */
+   raskt og sender ingenting til andre. Fargene er tokens, med mørkt tema fra systemet.
+   Bakgrunnene er som før, mens tekst, streker og markeringer er nøytralt grått, svart eller hvitt
+   uten grønt skjær. */
 :root {
   --bg: #f2f4f1;
   --surface: #ffffff;
-  --fg: #1b2420;
-  --muted: #56625c;
-  --line: #d8ded9;
-  --accent: #1f5c4a;
-  --accent-soft: #e2ece7;
+  --fg: #1c1c1c;
+  --muted: #5c5c5c;
+  --line: #dadada;
+  --accent: #333333;
+  --accent-soft: #e8e8e8;
   --font-display: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
   --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Consolas, monospace;
@@ -19,11 +21,11 @@
   :root {
     --bg: #111715;
     --surface: #18201d;
-    --fg: #e2e9e5;
-    --muted: #9aa8a1;
-    --line: #2a3531;
-    --accent: #7cc6aa;
-    --accent-soft: #1d2c27;
+    --fg: #e6e6e6;
+    --muted: #a6a6a6;
+    --line: #333333;
+    --accent: #ffffff;
+    --accent-soft: #262626;
     color-scheme: dark;
   }
 }
